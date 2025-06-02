@@ -29,8 +29,14 @@ question_bank = {
 
 @bot.event
 async def on_ready():
-    await bot.tree.sync()
-    print(f"Logged in as {bot.user}.")
+    await bot.wait_until_ready()  # На всякий случай, если запуск медленный
+    try:
+        synced = await bot.tree.sync()
+        print(f"Синхронизировано {len(synced)} команд")
+    except Exception as e:
+        print(f"Ошибка при синхронизации команд: {e}")
+    print(f"Бот запущен как {bot.user}")
+
 
 @bot.command()
 async def help(ctx):
@@ -78,8 +84,8 @@ async def question(ctx, difficulty: str):
 
     save_scores(scores)
 
-@bot.tree.command(name="ping", description="Ответит pong")
-async def ping_command(interaction: discord.Interaction):
+@bot.tree.command(name="ping", description="Проверка пинга")
+async def ping(interaction: discord.Interaction):
     await interaction.response.send_message("Pong!")
 
 bot.run(os.getenv("TOKEN"))
