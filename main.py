@@ -82,6 +82,7 @@ async def question(ctx, difficulty: str):
 async def ping_command(interaction: discord.Interaction):
     await interaction.response.send_message("Pong!")
 
-bot.run(os.getenv("DISCORD_TOKEN"))
+bot.run(os.getenv("TOKEN"))
+
 
 
