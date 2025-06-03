@@ -24,12 +24,12 @@ def save_scores(scores):
         json.dump(scores, f)
 
 question_bank = {
-    # ... твой блок вопросов тут без изменений ...
+
 }
 
 @bot.event
 async def on_ready():
-    await bot.wait_until_ready()  # На всякий случай, если запуск медленный
+    await bot.wait_until_ready()  
     try:
         synced = await bot.tree.sync()
         print(f"Синхронизировано {len(synced)} команд")
